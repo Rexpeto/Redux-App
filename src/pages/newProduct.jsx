@@ -1,7 +1,12 @@
+import FormProduct from "../components/FormProduct";
+
 const NewProduct = () => {
     return (
-        <div>
-            <h1 className="text-white">Nuevo producto</h1>
+        <div className="w-full">
+            <h1 className="text-white text-2xl font-bold mb-8">
+                Agregar nuevo producto
+            </h1>
+            <FormProduct />
         </div>
     );
 };
