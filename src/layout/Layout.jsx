@@ -5,7 +5,7 @@ const Layout = () => {
     return (
         <>
             <Header />
-            <main className="container">
+            <main className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto px-4 mt-5">
                 <Outlet />
             </main>
         </>
