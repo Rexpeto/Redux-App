@@ -1,10 +1,13 @@
-import Header from "./components/Header";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Layout from "./layout/Layout";
 
 const App = () => {
     return (
-        <div>
-            <Header />
-        </div>
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<Layout />}></Route>
+            </Routes>
+        </BrowserRouter>
     );
 };
 
