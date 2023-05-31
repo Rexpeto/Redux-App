@@ -12,7 +12,7 @@ const Layout = () => {
 		<>
 			<ToastContainer theme='dark' />
 			<Header />
-			<main className='max-w-screen-xl flex flex-wrap items-center justify-between mx-auto px-4 mt-5'>
+			<main className='max-w-screen-xl flex flex-wrap items-center justify-between mx-auto px-4 my-5'>
 				{loading ? <Spinner /> : <Outlet />}
 			</main>
 		</>
