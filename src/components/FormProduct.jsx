@@ -33,7 +33,7 @@ const FormProduct = () => {
 
 		addProduct({
 			name: product.name.toLowerCase(),
-			price: product.price,
+			price: Number(product.price),
 		});
 
 		setProduct({
