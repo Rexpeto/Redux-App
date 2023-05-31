@@ -22,6 +22,9 @@ const TableProduct = () => {
 		product.name.includes(search)
 	);
 
+	const formatMoney = money =>
+		money.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+
 	return products ? (
 		<div className='mx-auto max-w-screen-xl px-4 lg:px-12'>
 			<div className='bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden'>
@@ -75,7 +78,7 @@ const TableProduct = () => {
 										{product.name}
 									</td>
 									<td className='px-4 py-3 font-bold text-md'>
-										{product.price}
+										{formatMoney(product.price)}
 									</td>
 									<td className='px-4 py-3 flex items-center justify-end'>
 										<Link
