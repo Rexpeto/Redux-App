@@ -1,9 +1,10 @@
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { loadingProducts } from '../actions/productAction';
 
 const TableProduct = () => {
+	const [search, setSearch] = useState('');
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -11,7 +12,17 @@ const TableProduct = () => {
 		loadingProduct();
 	}, []);
 
-	return (
+	const { products } = useSelector(state => state.products);
+
+	const handleChange = e => {
+		setSearch(e.target.value.toLowerCase());
+	};
+
+	const filterProduct = products.filter(product =>
+		product.name.includes(search)
+	);
+
+	return products ? (
 		<div className='mx-auto max-w-screen-xl px-4 lg:px-12'>
 			<div className='bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden'>
 				<div className='flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4'>
@@ -41,6 +52,8 @@ const TableProduct = () => {
 									id='search'
 									className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  focus:border-primary-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white outline-none transition duration-150'
 									placeholder='Buscar'
+									onChange={e => handleChange(e)}
+									autoComplete='off'
 								/>
 							</div>
 						</form>
@@ -55,23 +68,33 @@ const TableProduct = () => {
 								<th className='flex justify-end px-4 py-3 text-md'>Acciones</th>
 							</tr>
 						</thead>
-						<tbody>
-							<tr className='border-b dark:border-gray-700'>
-								<td className='px-4 py-3 font-bold text-md'>Apple</td>
-								<td className='px-4 py-3 font-bold text-md'>300</td>
-								<td className='px-4 py-3 flex items-center justify-end'>
-									<Link
-										to='/product/edit/1'
-										className='text-white bg-blue-700 hover:bg-blue-800 outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-3 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 transition duration-150 cursor-pointer'
-									>
-										Editar
-									</Link>
-								</td>
-							</tr>
-						</tbody>
+						{filterProduct.map(product => (
+							<tbody key={product.id}>
+								<tr className='border-b dark:border-gray-700'>
+									<td className='px-4 py-3 font-bold text-md first-letter:uppercase'>
+										{product.name}
+									</td>
+									<td className='px-4 py-3 font-bold text-md'>
+										{product.price}
+									</td>
+									<td className='px-4 py-3 flex items-center justify-end'>
+										<Link
+											to={`/product/edit/${product.id}`}
+											className='text-white bg-blue-700 hover:bg-blue-800 outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-3 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 transition duration-150 cursor-pointer'
+										>
+											Editar
+										</Link>
+									</td>
+								</tr>
+							</tbody>
+						))}
 					</table>
 				</div>
 			</div>
+		</div>
+	) : (
+		<div>
+			<h1>No hay productos</h1>
 		</div>
 	);
 };
