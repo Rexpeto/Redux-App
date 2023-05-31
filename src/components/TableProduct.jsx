@@ -1,6 +1,16 @@
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { loadingProducts } from '../actions/productAction';
 
 const TableProduct = () => {
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		const loadingProduct = () => dispatch(loadingProducts());
+		loadingProduct();
+	}, []);
+
 	return (
 		<div className='mx-auto max-w-screen-xl px-4 lg:px-12'>
 			<div className='bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden'>

@@ -1,4 +1,9 @@
-import { ADD_PRODUCT, ADD_PRODUCT_SUCCESS } from '../types';
+import {
+	ADD_PRODUCT,
+	ADD_PRODUCT_SUCCESS,
+	LOADING_PRODUCTS,
+	LOADING_PRODUCTS_SUCCESS,
+} from '../types';
 
 const initialState = {
 	products: [],
@@ -12,12 +17,26 @@ export default (state = initialState, action) => {
 				...state,
 				loading: action.payload,
 			};
+
 		case ADD_PRODUCT_SUCCESS:
 			return {
 				...state,
 				loading: false,
 				products: [...state.products, action.payload],
 			};
+		case LOADING_PRODUCTS:
+			return {
+				...state,
+				loading: action.payload,
+			};
+			
+		case LOADING_PRODUCTS_SUCCESS:
+			return {
+				...state,
+				loading: false,
+				products: action.payload,
+			};
+
 		default:
 			return state;
 	}

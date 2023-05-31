@@ -33,3 +33,30 @@ const addProductSuccess = product => ({
 	type: ADD_PRODUCT_SUCCESS,
 	payload: product,
 });
+
+/**
+ * Loading Products
+ */
+
+export const loadingProducts = () => {
+	return async dispatch => {
+		dispatch(downloadProduct());
+
+		try {
+			const { data } = await clientAxios('/products');
+			dispatch(downloadProductSucces(data));
+		} catch (error) {
+			toast.error('Oops! Ocurrió un error');
+		}
+	};
+};
+
+const downloadProduct = () => ({
+	type: LOADING_PRODUCTS,
+	payload: false,
+});
+
+const downloadProductSucces = products => ({
+	type: LOADING_PRODUCTS_SUCCESS,
+	payload: products,
+});
