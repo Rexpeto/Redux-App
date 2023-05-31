@@ -1,5 +1,10 @@
 import { toast } from 'react-toastify';
-import { ADD_PRODUCT, ADD_PRODUCT_SUCCESS } from '../types';
+import {
+	ADD_PRODUCT,
+	ADD_PRODUCT_SUCCESS,
+	LOADING_PRODUCTS,
+	LOADING_PRODUCTS_SUCCESS,
+} from '../types';
 import clientAxios from '../config/axios';
 
 /**
