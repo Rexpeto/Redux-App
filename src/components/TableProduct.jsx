@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { loadingProducts } from '../actions/productAction';
+import RowProduct from './RowProduct';
 
 const TableProduct = () => {
 	const [search, setSearch] = useState('');
@@ -21,9 +21,6 @@ const TableProduct = () => {
 	const filterProduct = products.filter(product =>
 		product.name.includes(search)
 	);
-
-	const formatMoney = money =>
-		money.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
 
 	return products ? (
 		<div className='mx-auto max-w-screen-xl px-4 lg:px-12'>
@@ -72,24 +69,7 @@ const TableProduct = () => {
 							</tr>
 						</thead>
 						{filterProduct.map(product => (
-							<tbody key={product.id}>
-								<tr className='border-b dark:border-gray-700'>
-									<td className='px-4 py-3 font-bold text-md first-letter:uppercase'>
-										{product.name}
-									</td>
-									<td className='px-4 py-3 font-bold text-md'>
-										{formatMoney(product.price)}
-									</td>
-									<td className='px-4 py-3 flex items-center justify-end'>
-										<Link
-											to={`/product/edit/${product.id}`}
-											className='text-white bg-blue-700 hover:bg-blue-800 outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-3 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 transition duration-150 cursor-pointer'
-										>
-											Editar
-										</Link>
-									</td>
-								</tr>
-							</tbody>
+							<RowProduct key={product.id} product={product} />
 						))}
 					</table>
 				</div>
