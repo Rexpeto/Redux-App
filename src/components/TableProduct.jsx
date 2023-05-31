@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 const TableProduct = () => {
 	return (
 		<div className='mx-auto max-w-screen-xl px-4 lg:px-12'>
@@ -38,19 +40,22 @@ const TableProduct = () => {
 					<table className='w-full text-sm text-left text-gray-500 dark:text-gray-400'>
 						<thead className='text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'>
 							<tr>
-								<th className='px-4 py-3'>Nombre</th>
-								<th className='px-4 py-3'>Precio</th>
-								<th className='px-4 py-3 align-reft'>Acciones</th>
+								<th className='px-4 py-3 text-md'>Nombre</th>
+								<th className='px-4 py-3 text-md'>Precio</th>
+								<th className='flex justify-end px-4 py-3 text-md'>Acciones</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr className='border-b dark:border-gray-700'>
-								<td className='px-4 py-3'>Apple</td>
-								<td className='px-4 py-3'>300</td>
+								<td className='px-4 py-3 font-bold text-md'>Apple</td>
+								<td className='px-4 py-3 font-bold text-md'>300</td>
 								<td className='px-4 py-3 flex items-center justify-end'>
-									<a className='text-white bg-blue-700 hover:bg-blue-800 outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 transition duration-150 cursor-pointer'>
+									<Link
+										to='/product/edit/1'
+										className='text-white bg-blue-700 hover:bg-blue-800 outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-3 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 transition duration-150 cursor-pointer'
+									>
 										Editar
-									</a>
+									</Link>
 								</td>
 							</tr>
 						</tbody>
