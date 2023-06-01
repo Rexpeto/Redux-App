@@ -5,12 +5,15 @@ import {
 	LOADING_PRODUCTS_SUCCESS,
 	DELETE_PRODUCT,
 	DELETE_PRODUCT_SUCCESS,
+	EDIT_PRODUCT,
+	EDIT_PRODUCT_SUCCESS,
 } from '../types';
 
 const initialState = {
 	products: [],
 	loading: false,
 	productDelete: null,
+	product: {},
 };
 
 export default (state = initialState, action) => {
@@ -55,6 +58,17 @@ export default (state = initialState, action) => {
 				),
 				productDelete: null,
 				loading: false,
+			};
+
+		case EDIT_PRODUCT:
+			return {
+				...state,
+				product: action.payload,
+			};
+
+		case EDIT_PRODUCT_SUCCESS:
+			return {
+				...state,
 			};
 
 		default:
