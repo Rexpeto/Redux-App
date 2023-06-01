@@ -44,6 +44,7 @@ export default (state = initialState, action) => {
 			return {
 				...state,
 				productDelete: action.payload,
+				loading: true,
 			};
 
 		case DELETE_PRODUCT_SUCCESS:
@@ -53,6 +54,7 @@ export default (state = initialState, action) => {
 					product => product.id !== state.productDelete
 				),
 				productDelete: null,
+				loading: false,
 			};
 
 		default:
