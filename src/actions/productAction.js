@@ -8,6 +8,7 @@ import {
 	DELETE_PRODUCT_SUCCESS,
 } from '../types';
 import clientAxios from '../config/axios';
+import Swal from 'sweetalert2';
 
 /**
  * Create new producto
@@ -74,6 +75,7 @@ export const deleteProductAction = id => {
 		try {
 			await clientAxios.delete(`/products/${id}`);
 			dispatch(deleteProductSuccess());
+			Swal.fire('Eliminado!', 'Producto eliminado con exito.', 'success');
 		} catch ({ response }) {
 			toast.error('Oops! Ocurrió un error');
 		}

@@ -20,7 +20,6 @@ const RowProduct = ({ product: { name, price, id } }) => {
 			confirmButtonText: 'Si, eliminar!',
 		}).then(result => {
 			if (result.isConfirmed) {
-				Swal.fire('Eliminado!', 'Producto eliminado con exito.', 'success');
 				dispatch(deleteProductAction(id));
 			}
 		});
