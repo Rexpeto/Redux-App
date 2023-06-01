@@ -6,6 +6,8 @@ import {
 	LOADING_PRODUCTS_SUCCESS,
 	DELETE_PRODUCT,
 	DELETE_PRODUCT_SUCCESS,
+	EDIT_PRODUCT,
+	EDIT_PRODUCT_SUCCESS,
 } from '../types';
 import clientAxios from '../config/axios';
 import Swal from 'sweetalert2';
@@ -89,4 +91,40 @@ const deleteProduct = id => ({
 
 const deleteProductSuccess = () => ({
 	type: DELETE_PRODUCT_SUCCESS,
+});
+
+/**
+ * Edit Product
+ */
+
+export const getProductEdit = product => {
+	return dispatch => {
+		dispatch(getProductAction(product));
+	};
+};
+
+const getProductAction = product => ({
+	type: EDIT_PRODUCT,
+	payload: product,
+});
+
+export const editProductAction = product => {
+	return async dispatch => {
+		dispatch(editProduct(product));
+
+		try {
+			const { data } = await clientAxios.put(
+				`/products/${product.id}`,
+				product
+			);
+			toast.success('Producto editado con exito');
+		} catch ({ response }) {
+			toast.error('Oops! Ocurrió un error');
+		}
+	};
+};
+
+const editProduct = product => ({
+	type: EDIT_PRODUCT_SUCCESS,
+	payload: product,
 });
