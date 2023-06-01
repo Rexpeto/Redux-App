@@ -3,11 +3,14 @@ import {
 	ADD_PRODUCT_SUCCESS,
 	LOADING_PRODUCTS,
 	LOADING_PRODUCTS_SUCCESS,
+	DELETE_PRODUCT,
+	DELETE_PRODUCT_SUCCESS,
 } from '../types';
 
 const initialState = {
 	products: [],
 	loading: false,
+	productDelete: null,
 };
 
 export default (state = initialState, action) => {
@@ -29,12 +32,26 @@ export default (state = initialState, action) => {
 				...state,
 				loading: action.payload,
 			};
-			
+
 		case LOADING_PRODUCTS_SUCCESS:
 			return {
 				...state,
 				loading: false,
 				products: action.payload,
+			};
+
+		case DELETE_PRODUCT:
+			return {
+				...state,
+				productDelete: action.payload,
+			};
+
+		case DELETE_PRODUCT_SUCCESS:
+			return {
+				...state,
+				products: state.products.filter(
+					product => product.id !== state.productDelete
+				),
 			};
 
 		default:

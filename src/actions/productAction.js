@@ -4,6 +4,8 @@ import {
 	ADD_PRODUCT_SUCCESS,
 	LOADING_PRODUCTS,
 	LOADING_PRODUCTS_SUCCESS,
+	DELETE_PRODUCT,
+	DELETE_PRODUCT_SUCCESS,
 } from '../types';
 import clientAxios from '../config/axios';
 
@@ -59,4 +61,30 @@ const downloadProduct = () => ({
 const downloadProductSucces = products => ({
 	type: LOADING_PRODUCTS_SUCCESS,
 	payload: products,
+});
+
+/**
+ * Delete Product
+ */
+
+export const deleteProductAction = id => {
+	return async dispatch => {
+		dispatch(deleteProduct(id));
+
+		try {
+			await clientAxios.delete(`/products/${id}`);
+			dispatch(deleteProductSuccess());
+		} catch ({ response }) {
+			toast.error('Oops! Ocurrió un error');
+		}
+	};
+};
+
+const deleteProduct = id => ({
+	type: DELETE_PRODUCT,
+	payload: id,
+});
+
+const deleteProductSuccess = () => ({
+	type: DELETE_PRODUCT_SUCCESS,
 });
