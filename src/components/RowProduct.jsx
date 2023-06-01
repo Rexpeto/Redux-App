@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { deleteProductAction } from '../actions/productAction';
+import Swal from 'sweetalert2';
 
 const RowProduct = ({ product: { name, price, id } }) => {
 	const formatMoney = money =>
@@ -9,7 +10,20 @@ const RowProduct = ({ product: { name, price, id } }) => {
 	const dispatch = useDispatch();
 
 	const confirmDeleteProduct = id => {
-		dispatch(deleteProductAction(id));
+		Swal.fire({
+			title: '¿Estas seguro?',
+			text: `Eliminaras el producto ${name}`,
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Si, eliminar!',
+		}).then(result => {
+			if (result.isConfirmed) {
+				Swal.fire('Eliminado!', 'Producto eliminado con exito.', 'success');
+				dispatch(deleteProductAction(id));
+			}
+		});
 	};
 
 	return (
