@@ -2,6 +2,7 @@ import { useDispatch } from 'react-redux';
 import { createProductAction } from '../actions/productAction';
 import { toast } from 'react-toastify';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const FormProduct = () => {
 	const [product, setProduct] = useState({
@@ -10,6 +11,8 @@ const FormProduct = () => {
 	});
 
 	const dispatch = useDispatch();
+
+	const navigate = useNavigate();
 
 	const addProduct = product => dispatch(createProductAction(product));
 
@@ -40,6 +43,8 @@ const FormProduct = () => {
 			name: '',
 			price: '',
 		});
+
+		navigate('/');
 	};
 
 	return (
